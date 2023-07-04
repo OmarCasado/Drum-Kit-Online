@@ -1,4 +1,6 @@
 
+
+//Detect when button pressed
 numberOfDrumButtons = document.querySelectorAll(".drum").length
 
 for ( var i = 0; i < numberOfDrumButtons; i++) {
@@ -6,14 +8,15 @@ for ( var i = 0; i < numberOfDrumButtons; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function() { 
 
         makeSound(this.innerHTML);
+        buttonAnimation(this.innerHTML);
 
-
-        
     });
 }
 
+//Detect witch key was pressed
 document.addEventListener("keypress", function (event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
 
@@ -58,5 +61,20 @@ function makeSound(key) {
     
         default: console.log(this.innerHTML);
     }
+
+}
+
+//Animates pressed button
+
+function buttonAnimation(currentKey){
+
+    var activeButton = document.querySelector("." + currentKey);
+
+    activeButton.classList.add("pressed");
+
+        //Set Time Out Function in order to make animation disappear.
+    setTimeout( function(){
+        activeButton.classList.remove("pressed");
+    }, 100);
 
 }
